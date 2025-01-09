@@ -118,7 +118,27 @@ the bench mark is 4-9 (99.99%) which mean less then one hour per year
 - **Horizontal Partitioning:**
     - dividing a table's data by rows
 
+**Q27- What is Auto Scaling ?** <br />
+**A27- Auto Scaling** is work with **scaling down (horizontal scaling)** - in auto scaling we config the system so it will add or delete new server automatically (as per traffic) - also refer as **elasticity**.
+
+**Q28- What is Props and Cons of using Single Server ?** <br />
+**A28-** few props and cons listed below:
+- **Props:**
+    - it simple to build
+    - it simple to **scale** (just add more hardware - or **Scale Up**)
+    - only recommended for small app - practice or learning purpose
+- **Cons:**
+    - you can not scale separately
+    - no separation of concerns (focus on code)
+        - hard to manage - specially in large team
+    - it's a **Single Point Of Failure (SPOF)**
+    - easy target for **DDOS**
+
 ## Key words
 - *Stale is use for old(incorrect) data*
 - *note is a compute/server in multi computer system*
 - *Database **Partitioning** at note level is know as **sharding***
+- *well **DDOS - Distributed Denial-of-Service** is a cyber crime that flood a website or server with traffic to make it inaccessible*
+
+## Recommended Book
+- ***System Design Interview***
