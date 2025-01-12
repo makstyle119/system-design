@@ -134,6 +134,75 @@ the bench mark is 4-9 (99.99%) which mean less then one hour per year
     - it's a **Single Point Of Failure (SPOF)**
     - easy target for **DDOS**
 
+**Q29- What is Props and Cons of using 3-tier Architecture ?** <br />
+**A29-** few props and cons listed below:
+- **Props:**
+    - super common to use
+    - biggest win now you can scale up or down all three services independently 
+    - **fronted:**
+        - you can use **serverless Services**
+- **Cons:**
+    - more code (separate frontend and backend and yes database)
+    - add complexity
+    - handle networking
+    - still limited to **vertical scaling**
+
+**Q30- What is Serverless ?**  <br />
+**A30- Serverless** is when cloud provider manage all the under the layer things of the server and you only pay for the usage and don't worry about scalability.
+
+**Q31- What is Props and Cons of using micro service Architecture ?** <br />
+**A31-** few props and cons listed below:
+- **Props:**
+    - remove SPOF
+    - easy to horizontal vertical
+    - achieved **high availability**
+    - support auto **scaling** - **elasticity**
+- **Cons:**
+    - add load balancing
+    - no caching
+    - expensive to manage
+    - add more complexity
+
+**Q32- what is load balancer ?** <br />
+**A32- load balancer** help me manage vertical scaling - and manage it as per traffic
+
+**Q33- What is cache ?** <br />
+**A33-** let's understand it as you visit the website and to see the website frontend make a request to backend and backend make request to database and then database return to backend and then backend return to frontend and then you see the data - so cache come in place to minimized all this request and save value into one of 3 places - you can save data on frontend to eliminate backend request or save data on backend to eliminate database request, so what will happened now:
+1. **frontend caching:**
+    - you visit the website first time and it take required time to load and then save everything into client browser cache and next time you visit you will see website loading instance (because of saving in cache)
+    - use for save harmless values to save on frontend
+        - **example:**
+            - user theme
+            - images
+            - user info
+2. **backend caching:**
+    - now say you visit same website and all the images is same on frontend but your it fetch horoscope from backend which again come from database. but we now that horoscope value will change after one day so if you visit same website in same day backend will not fetch horoscope information from database and just return save value from backend server
+        - **example:**
+            - LOV = (list of values)
+            - anything which will take some time to update
+
+**Q34- What is CDN - (Content delivery Network) ?** <br />
+**A34- CDN** is same as Cache for frontend. let's say you have server in london and people from india visit. indian people request will travel from india to all the way london to fetch the website. and it will take time. so what we can do with this. let's say you can have access to multiple server in the world so you deploy your website in all the server and now user will get response from nearest server. a cdn will do the exactly this and deploy your website to multiple server and you get a faster website
+- **CDN** is a service so you probably use it rather then creating your own
+
+**Q35- What is Props and Cons of using a CDN ?** <br />
+**A35-** few props and cons listed below:
+- **Props:**
+    - make website fast (increase speed and reduce **latency**)
+    - easy to implement
+    - easy to make app global
+    - mostly **CDN** have security to 
+    - good for **SEO**
+    - good for **images**, **videos** and **downloads**
+- **Cons:**
+    - add complexity
+    - only work with client-side application (so if you have a website with server side pages this is not for you)
+    - costly
+- **Use Case:**
+    - use for script (*html, css, js*)
+    - use for *photos*
+    - use for *videos*
+
 ## Key words
 - *Stale is use for old(incorrect) data*
 - *note is a compute/server in multi computer system*
