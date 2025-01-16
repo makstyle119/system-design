@@ -203,11 +203,28 @@ the bench mark is 4-9 (99.99%) which mean less then one hour per year
     - use for *photos*
     - use for *videos*
 
+**Q36- What is Props and Cons of Cache ?** <br />
+**A36-** few props and cons listed below:
+- **Props:**
+    - less db hits
+    - faster speed
+    - it's cheaper to manage
+- **Cons:**
+    - increase complexity
+    - increase development effort
+
 ## Key words
 - *Stale is use for old(incorrect) data*
 - *note is a compute/server in multi computer system*
 - *Database **Partitioning** at note level is know as **sharding***
 - *well **DDOS - Distributed Denial-of-Service** is a cyber crime that flood a website or server with traffic to make it inaccessible*
+
+## Tips
+- ***For Database:*** 
+    - *start with vertical scale as much as possible before going to horizontally*
+    - *or have multiple server, multi read and single write*
+- ***For Backend:*** 
+    - *start with split service into smaller services and then move to micro services*
 
 ## Recommended Book
 - ***System Design Interview***
