@@ -213,11 +213,81 @@ the bench mark is 4-9 (99.99%) which mean less then one hour per year
     - increase complexity
     - increase development effort
 
+**Q37- How can I put a server on web ?** <br />
+**A37-** In general there are 2 ways
+- **In House:**
+    - If you want to host your server in house just go buy a server (machine), config the ip and you good to go.
+    - **Props:**
+        - it's cheaper to manage
+    - **Cons:**
+        - space *(you have a limit memory)*
+        - hardware limitation *(it's hard to update hardware of an in-house server)*
+- **Using Cloud:**
+    - If you want to host your application on cloud just simple go to any cloud provider and buy the server
+    - **Props:**
+        - forget about hardware layer
+    - **Cons:**
+        - costly in start (for one to two servers)
+
+**Q38- If you have to scale a web application what should you choice Scale up or Scale Out ?** <br />
+**A38-** Well for this particular question we have no perfect answer:
+the answer will depend on which server you are using:
+- **frontend:**
+    - you have few great option:
+        - **Serverless**
+        - **CDN** 
+- **backend:**
+    -   there are key point which required when you want to scale your backend *(api)* server
+        -   it should be stateless
+        - next we will move to scaling
+            - **Vertical Scaling**
+                - there are 4 things you can scale on vertical scaling
+                    1. CPU
+                    2. RAM
+                    3. Disk/Storage
+                    4. Network
+                - so we have few step to follow
+                    1. adjust the instance
+                        - update the thing which make issue, like CPU, RAM, Storage, or Network
+                - **Props:**
+                    - it simple
+                    - easy to start
+                - **Cons:**
+                    - it have **single point of failure**
+            - **Horizontal Scaling**
+                - start with scaling into 2 notes if you already scale vertical enough
+                - **Props:**
+                    - it have High Availability
+                - **Cons:**
+                    - add complexity
+                    - need load balancer
+            - **Hybrid Scaling**
+                - start with increase the instance in vertical to get a decent instance then add 2 node to remove **SPOF**, now at this stage you can decide either you need **horizontal** or **vertical** scaling
+- **database:**
+    - we can scale our data both **Vertical** and **horizontal**
+        - **Vertical Scaling**
+            - just increase the node and you good to go
+            - **Props:**
+                - easy to do
+            - **Cons:**
+                - have single point of failure
+        - **Horizontal Scaling**
+            - create a stand by database (only work if anything happen with primary)
+            - **Props:**
+                - remove the single point of failure
+            - **Cons:**
+                - add complexity
+        - **Hybrid Scaling**
+            - have a Write node and create at least 2 read node to manage traffic
+
 ## Key words
 - *Stale is use for old(incorrect) data*
 - *note is a compute/server in multi computer system*
 - *Database **Partitioning** at note level is know as **sharding***
 - *well **DDOS - Distributed Denial-of-Service** is a cyber crime that flood a website or server with traffic to make it inaccessible*
+- ***Horizontal Scaling** = **Scaling Out***
+- ***Vertical Scaling** = **Scaling up***
+- ***Diminishing Returns** in simple you will not double return if you invest double resource*
 
 ## Tips
 - ***For Database:*** 
@@ -226,5 +296,9 @@ the bench mark is 4-9 (99.99%) which mean less then one hour per year
 - ***For Backend:*** 
     - *start with split service into smaller services and then move to micro services*
 
-## Recommended Book
+## Recommended
+### Book
 - ***System Design Interview***
+### Cloud Provider
+- ***[AWS](https://aws.amazon.com/)***
+- ***[Azure](https://azure.microsoft.com/)***
