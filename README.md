@@ -184,6 +184,7 @@ the bench mark is 4-9 (99.99%) which mean less then one hour per year
 **Q34- What is CDN - (Content delivery Network) ?** <br />
 **A34- CDN** is same as Cache for frontend. let's say you have server in london and people from india visit. indian people request will travel from india to all the way london to fetch the website. and it will take time. so what we can do with this. let's say you can have access to multiple server in the world so you deploy your website in all the server and now user will get response from nearest server. a cdn will do the exactly this and deploy your website to multiple server and you get a faster website
 - **CDN** is a service so you probably use it rather then creating your own
+- **Edge Worker** - look for distributed backend
 
 **Q35- What is Props and Cons of using a CDN ?** <br />
 **A35-** few props and cons listed below:
@@ -280,14 +281,67 @@ the answer will depend on which server you are using:
         - **Hybrid Scaling**
             - have a Write node and create at least 2 read node to manage traffic
 
+**Q39- How we can scale horizontal ?** <br />
+**A39-** Well three are few ways to do that:
+- **Same Data Center:**
+    - let's say *AWS* have server center in *mumbai* and you chose both your node (in **horizontal scaling**) in *mumbai* and in same data center so it mean your server is hosted in same place, it will remove **SPOF** but it will take a little long time for someone from *US* (because server is still far)
+    - **Props:**
+        - increase **High Availability**
+        - add **scalability**
+        - remove Single Point Of failure
+    - **Cons:**
+        - still slow for someone how access your service from far (no impact on **latency**)
+- **Same Region But Different Data Center:**
+    - now you again on *AWS* and chose different data center in same region, well if you are only working in specific region then this will work just fine otherwise same problem for above, other region will face **latency**
+- **Different Region:**
+    - now you go in different region, it will help with latency and you can scale few server a little more up then other as per traffic
+        - make sure you assign traffic to closet region
+            - for this you have to use geolocation routing (route 53 manage geolocation in *AWS*)
+        - and each server again have multiple notes in same/different data center to increase *availability* and remove *SPOF*
+        - it will look something like this
+            ```
+            |- client Request
+                |- Geo Location (DNS)
+                    |- Region abc-1
+                        |- availability zone (data center) az-1 (optional)
+                            |- load balancer
+                                |- node1 (your server)
+                                |- node2 (your server)
+                        |- availability zone (data center) az-2 (optional)
+                            |- node1 (your server)
+                    |- Region abc-2
+                        |- availability zone (data center) az-1 (optional)
+                            |- load balancer
+                                |- node1 (your server)
+                                |- node2 (your server)
+            ```
+            - so as you see in each region we can have multiple notes inside a load balancer ( which is optional ) and you can have as many as you want and user request will first go to geo location (DNS) then the nearest region and inside the region in the available node
+            - it will increase complexity a lot more
+            - it any region go down you can route to other region **(just beware of laws of the region)**
+    - **Props:**
+        - improve **latency**
+        - improve **high availability**
+        - remove **SPOF**
+    - **Cons:**
+        - add **complexity**
+        - higher **cost**
+        - still in **global**
+- **Different continent:**
+    - going global may bring some concern
+        - **localization requirement**
+            - there are multiple laws in how to save and what to save in the database to beware of that
+    - a part of that everything go same as in different region
+
 ## Key words
-- *Stale is use for old(incorrect) data*
-- *note is a compute/server in multi computer system*
+- *Stale = use for old(incorrect) data*
+- *note = a compute/server in multi computer system*
 - *Database **Partitioning** at note level is know as **sharding***
-- *well **DDOS - Distributed Denial-of-Service** is a cyber crime that flood a website or server with traffic to make it inaccessible*
-- ***Horizontal Scaling** = **Scaling Out***
-- ***Vertical Scaling** = **Scaling up***
-- ***Diminishing Returns** in simple you will not double return if you invest double resource*
+- *DDOS - Distributed Denial-of-Service = is a cyber crime that flood a website or server with traffic to make it inaccessible*
+- *Horizontal Scaling = Scaling Out*
+- *Vertical Scaling = Scaling up*
+- *Diminishing Returns = in simple you will not double return if you invest double resource*
+- *region = is a specific area*
+- *SPOF = Single Point Of failure*
 
 ## Tips
 - ***For Database:*** 
