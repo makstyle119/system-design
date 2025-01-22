@@ -332,6 +332,25 @@ the answer will depend on which server you are using:
             - there are multiple laws in how to save and what to save in the database to beware of that
     - a part of that everything go same as in different region
 
+**Q40- What is CAP Theorem ?** <br />
+**A40- CAP Theorem** is consist of 3 things:
+- **Consistency:**
+    - in simple all your database note should be consistence
+    - in other words, having most recent data in all db notes
+- **Availability:**
+    - in simple if you get some data from your database it should give a response
+    - in other words, getting a response with data
+- **Partition:**
+    - in simple words, communication in two notes get disrupted but still working fine
+    - two note didn't stay sync for some know/unknown reasons but still provide response
+in **CAT Theorem** you have to chose between two from three of this, and **Partition** is import because we need response so we will choice between **Consistency** or **Availability**
+- **AP - (Availability & Partition):**
+    - in this situation you might get updated data from node one and node two might send stale data
+- **CP - (Consistency & Partition):**
+    - in this situation you might didn't get response from one to two note but every response is up to date
+- **CA - (Consistency & Availability) - (only work in theory):**
+    - in this situation you might get data some time which is up to date and some time you don't because we don't have **Partition** here and that's why in only work in theory
+
 ## Key words
 - *Stale = use for old(incorrect) data*
 - *note = a compute/server in multi computer system*
