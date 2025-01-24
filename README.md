@@ -256,7 +256,7 @@ the answer will depend on which server you are using:
                 - **Cons:**
                     - it have **single point of failure**
             - **Horizontal Scaling**
-                - start with scaling into 2 notes if you already scale vertical enough
+                - start with scaling into 2 nodes if you already scale vertical enough
                 - **Props:**
                     - it have High Availability
                 - **Cons:**
@@ -297,7 +297,7 @@ the answer will depend on which server you are using:
     - now you go in different region, it will help with latency and you can scale few server a little more up then other as per traffic
         - make sure you assign traffic to closet region
             - for this you have to use geolocation routing (route 53 manage geolocation in *AWS*)
-        - and each server again have multiple notes in same/different data center to increase *availability* and remove *SPOF*
+        - and each server again have multiple nodes in same/different data center to increase *availability* and remove *SPOF*
         - it will look something like this
             ```
             |- client Request
@@ -315,7 +315,7 @@ the answer will depend on which server you are using:
                                 |- node1 (your server)
                                 |- node2 (your server)
             ```
-            - so as you see in each region we can have multiple notes inside a load balancer ( which is optional ) and you can have as many as you want and user request will first go to geo location (DNS) then the nearest region and inside the region in the available node
+            - so as you see in each region we can have multiple nodes inside a load balancer ( which is optional ) and you can have as many as you want and user request will first go to geo location (DNS) then the nearest region and inside the region in the available node
             - it will increase complexity a lot more
             - it any region go down you can route to other region **(just beware of laws of the region)**
     - **Props:**
@@ -335,37 +335,70 @@ the answer will depend on which server you are using:
 **Q40- What is CAP Theorem ?** <br />
 **A40- CAP Theorem** is consist of 3 things:
 - **Consistency:**
-    - in simple all your database note should be consistence
-    - in other words, having most recent data in all db notes
+    - in simple all your database node should be consistence
+    - in other words, having most recent data in all db nodes
 - **Availability:**
     - in simple if you get some data from your database it should give a response
     - in other words, getting a response with data
 - **Partition:**
-    - in simple words, communication in two notes get disrupted but still working fine
-    - two note didn't stay sync for some know/unknown reasons but still provide response
+    - in simple words, communication in two nodes get disrupted but still working fine
+    - two node didn't stay sync for some know/unknown reasons but still provide response
 in **CAT Theorem** you have to chose between two from three of this, and **Partition** is import because we need response so we will choice between **Consistency** or **Availability**
 - **AP - (Availability & Partition):**
     - in this situation you might get updated data from node one and node two might send stale data
 - **CP - (Consistency & Partition):**
-    - in this situation you might didn't get response from one to two note but every response is up to date
+    - in this situation you might didn't get response from one to two node but every response is up to date
 - **CA - (Consistency & Availability) - (only work in theory):**
     - in this situation you might get data some time which is up to date and some time you don't because we don't have **Partition** here and that's why in only work in theory
 
+**Q41- How you can scale a Database ?** <br />
+**A41-** Let's break this into 2:
+- **Relational Database:**
+    - **Vertical Scaling:**
+        - first make sure you have strong/powerful node before going for **horizontal scaling**
+    - **Caching:**
+        - second thing you need to use caching to minimize database hits
+    - **Data Warehouse:**
+        - we have data warehouse were you have one primary database only for transaction (OLTP) and another for analytics purpose (OLAP)
+        - data warehouse
+    - **Horizontal Scaling:**
+        - start with a standby node for high availability 
+            - **Replication:**
+                - we need to replicate data from one node to another continuously
+                - we use **write ahead log (wal)** to achieve replica
+            - **Separate Replication:**
+                - you can have one backup for writing as mention above and other for reading to minimize the load on master node, this may very case to case. 
+                - and yes if you want you can have standup nodes for read node which is optional
+            - **Sharding:**
+                - here let's say we have multiple nodes so we don't replicate everything to every node but only one, with this way you can increase writing capacity of the database but it will increase the complexity, keeping things consistence and we ofter use services for this with relational databases.
+- **Non-Relational Database:**
+    - in noSQL you might use
+        - all this 3 didn't need scaling because they use for temporary storing data
+            - redis
+            - elasticSearch
+            - clientSide (indexdb)
+    - **Sharding:**
+        - sharding is easy in noSQL but using noSQL with bring it's own challenges as well
+
 ## Key words
 - *Stale = use for old(incorrect) data*
-- *note = a compute/server in multi computer system*
-- *Database **Partitioning** at note level is know as **sharding***
+- *node = a compute/server in multi computer system*
+- *Database **Partitioning** at node level is know as **sharding***
 - *DDOS - Distributed Denial-of-Service = is a cyber crime that flood a website or server with traffic to make it inaccessible*
 - *Horizontal Scaling = Scaling Out*
 - *Vertical Scaling = Scaling up*
 - *Diminishing Returns = in simple you will not double return if you invest double resource*
 - *region = is a specific area*
 - *SPOF = Single Point Of failure*
+- *OLTP = Online transaction Process*
+- *OLAP = Online Analytics Process*
+- *wal = Write Ahead Log*
 
 ## Tips
 - ***For Database:*** 
     - *start with vertical scale as much as possible before going to horizontally*
     - *or have multiple server, multi read and single write*
+    - *you can use *haproxy* for horizontal scaling*
 - ***For Backend:*** 
     - *start with split service into smaller services and then move to micro services*
 
