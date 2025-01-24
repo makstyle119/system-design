@@ -408,3 +408,7 @@ in **CAT Theorem** you have to chose between two from three of this, and **Parti
 ### Cloud Provider
 - ***[AWS](https://aws.amazon.com/)***
 - ***[Azure](https://azure.microsoft.com/)***
+
+## Resources
+I start my journey using this cool stuff so shout to them:
+- <a href="https://www.youtube.com/watch?v=oh8GvLf45t0&list=PL_c9BZzLwBRLSs6x50D5WIH76VCUxJs9E&index=7" target="_blank">System Design by Caleb Curry</a>
